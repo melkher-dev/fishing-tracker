@@ -13,6 +13,17 @@ return new class extends Migration
     {
         Schema::create('trips', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+
+            $table->string('location');
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
+
+            $table->json('fishing_details');
+            $table->integer('duration')->nullable();
+            $table->text('notes')->nullable();
+            $table->date('date')->nullable();
             $table->timestamps();
         });
     }
