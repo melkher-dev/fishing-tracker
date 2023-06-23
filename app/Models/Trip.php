@@ -11,6 +11,11 @@ class Trip extends Model
 
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'fishing_details' => 'json',
+        'date' => 'date',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
