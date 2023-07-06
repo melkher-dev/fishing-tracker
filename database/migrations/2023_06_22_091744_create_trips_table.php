@@ -16,11 +16,11 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
 
-            $table->string('location');
-            $table->string('latitude')->nullable();
-            $table->string('longitude')->nullable();
+            $table->string('location')->nullable();
+            $table->decimal('latitude', 11, 8)->nullable();
+            $table->decimal('longitude', 11, 8)->nullable();
 
-            $table->json('fishing_details');
+            $table->json('fishing_details')->nullable();
             $table->integer('duration')->nullable();
             $table->text('notes')->nullable();
             $table->date('date')->nullable();
