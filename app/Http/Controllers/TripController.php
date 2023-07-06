@@ -46,4 +46,11 @@ class TripController extends Controller
 
         return $trip->id;
     }
+
+    public function upload(Request $request)
+    {
+        $path = $request->file('image')->store('public/images');
+
+        return $path;
+    }
 }

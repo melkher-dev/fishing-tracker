@@ -25,9 +25,9 @@ class TripStoreRequest extends FormRequest
             'location' => 'required|string',
             'latitude' => 'nullable|numeric',
             'longitude' => 'nullable|numeric',
-            'fishing_details' => 'required|json',
+            'fishing_details' => 'required|array',
             'duration' => 'nullable|numeric',
-            'notes' => 'nullable|text',
+            'notes' => 'nullable|string',
             'date' => 'nullable|date',
         ];
     }

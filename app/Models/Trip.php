@@ -12,7 +12,7 @@ class Trip extends Model
     protected $guarded = ['id'];
 
     protected $casts = [
-        'fishing_details' => 'json',
+        'fishing_details' => 'array',
         'date' => 'date',
     ];
 

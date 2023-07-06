@@ -36,6 +36,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/trip/create', [TripController::class, 'create'])->name('trip.create');
+    Route::post('/trip/store', [TripController::class, 'store'])->name('trip.store');
+    Route::post('/trip/upload', [TripController::class, 'upload'])->name('trip.upload');
 });
 
 require __DIR__.'/auth.php';
