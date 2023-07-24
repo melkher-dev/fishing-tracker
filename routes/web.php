@@ -38,6 +38,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/trip/create', [TripController::class, 'create'])->name('trip.create');
     Route::post('/trip/store', [TripController::class, 'store'])->name('trip.store');
     Route::post('/trip/upload', [TripController::class, 'upload'])->name('trip.upload');
+    Route::get('/trip/{id}', [TripController::class, 'show'])->name('trip.show');
+    Route::get('/trips', [TripController::class, 'index'])->name('trips');
 });
 
 require __DIR__.'/auth.php';

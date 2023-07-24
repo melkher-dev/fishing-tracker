@@ -2,21 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Fish;
 use App\Models\Trip;
+use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Http\Requests\TripStoreRequest;
+use Illuminate\Support\Facades\Redirect;
 
 class TripController extends Controller
 {
     public function index()
     {
-        // return Trip::all();
+        $user = auth()->user();
+
+        $trips = $user->trips()->orderBy('date', 'desc')->get();
+
+        return inertia('Trips/TripsIndex', [
+            'trips' => $trips
+        ]);
     }
 
     public function show($id)
     {
-        // return Trip::find($id);
+        $trip = Trip::find($id);
+
+        return inertia('Trips/TripShow', [
+            'trip' => $trip
+        ]);
     }
 
     public function create()
@@ -40,16 +53,20 @@ class TripController extends Controller
         //'fishing_details' => ['fish_type', 'quantity', 'photo'];
         $trip->duration = $request->input('duration');
         $trip->notes = $request->input('notes');
-        $trip->date = $request->input('date');
+        $trip->date = $request->input('date') ?? Carbon::now()->toDateString();
 
         $trip->save();
 
-        return $trip->id;
+        return to_route('trip.show', [
+            'id' => $trip->id,
+        ]);
     }
 
     public function upload(Request $request)
     {
         $path = $request->file('image')->store('public/images');
+
+        $path = asset('storage/images/' . basename($path));
 
         return $path;
     }

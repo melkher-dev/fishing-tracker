@@ -142,24 +142,27 @@ const props = defineProps({
 
 const fish = ref(props.fish);
 
-const handleTrip = async () => {
-    const response = await axios.post("/trip/store", form);
-    console.log(response.data);
-    // router.push({ name: "trips.index" });
+const handleTrip = () => {
+    const response = router.post("/trip/store", form);
 };
 
 const fileUpload = async (e, index) => {
     const file = e.target.files[0];
     const formData = new FormData();
     formData.append("image", file);
-    const config = {
-        headers: {
-            "content-type": "multipart/form-data",
-        },
-    };
-    const response = await axios.post("/trip/upload", formData, config);
 
-    form.fishing_details[index].image = response.data;
+    try {
+        const config = {
+            headers: {
+                "content-type": "multipart/form-data",
+            },
+        };
+        const response = await axios.post("/trip/upload", formData, config);
+
+        form.fishing_details[index].image = response.data;
+    } catch (error) {
+        console.log("error", error);
+    }
 };
 </script>
 
