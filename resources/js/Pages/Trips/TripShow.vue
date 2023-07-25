@@ -11,18 +11,39 @@
         <div class="flex justify-center">
             <div class="card bg-white w-2/3 text-gray-800 shadow-xl m-5">
                 <div class="card-body">
-                    <h1>{{ trip.location }}</h1>
-                    <h1>{{ trip.latitude }}</h1>
-                    <h1>{{ trip.lontitude }}</h1>
-                    <h1>{{ trip.fishing_details[0].fish }}</h1>
-                    <img
-                        :src="trip.fishing_details[0].image"
-                        alt="photo"
-                        style="width: 200px"
-                    />
-                    <h1>{{ trip.fishing_details[0].quantity }}</h1>
-                    <h1>{{ trip.duration }}</h1>
-                    <h1>{{ trip.notes }}</h1>
+                    <div class="card-actions justify-center">
+                        <h1>
+                            <strong>Location: {{ trip.location }}</strong>
+                        </h1>
+                    </div>
+                    <div>
+                        <h1>Latitude: {{ trip.latitude }}</h1>
+                        <h1>Lontitude: {{ trip.lontitude }}</h1>
+                    </div>
+                    <div class="card-actions justify-center">
+                        <h1>Fishing Details</h1>
+                    </div>
+                    <div
+                        class="grid grid-cols-3 card-actions justify-center"
+                        v-for="(fishing_detail, index) in trip.fishing_details"
+                        :key="index"
+                    >
+                        <div>
+                            <h1>Fish: {{ fishing_detail.fish }}</h1>
+                        </div>
+                        <div>
+                            <img
+                                :src="fishing_detail.image"
+                                alt="photo"
+                                style="width: 100px"
+                            />
+                        </div>
+                        <div>
+                            <h1>Quantity: {{ fishing_detail.quantity }}</h1>
+                        </div>
+                    </div>
+                    <h1>Duration: {{ trip.duration }}</h1>
+                    <h1>Notes: {{ trip.notes }}</h1>
                     <h1>{{ new Date(trip.date).toDateString() }}</h1>
                 </div>
             </div>

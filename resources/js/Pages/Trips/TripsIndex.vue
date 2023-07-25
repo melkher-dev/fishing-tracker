@@ -13,16 +13,11 @@
                 :key="index"
                 class="card w-96 bg-white text-gray-800 shadow-xl mt-5 mx-5"
             >
-                <figure>
-                    <img
-                    class="mt-5"
-                        :src="trip.fishing_details[0].image"
-                        style="width: 200px"
-                    />
-                </figure>
                 <div class="card-body">
-                    <h2 class="card-title">{{ trip.location }}</h2>
-                    <h2 class="card-title">{{ new Date(trip.date).toDateString() }}</h2>
+                    <h2 class="card-title">Location: {{ trip.location }}</h2>
+                    <h2 class="card-title">
+                        {{ new Date(trip.date).toDateString() }}
+                    </h2>
                     <div class="card-actions justify-end">
                         <a :href="`/trip/${trip.id}`">
                             <button class="btn btn-primary btn-outline btn-sm">
