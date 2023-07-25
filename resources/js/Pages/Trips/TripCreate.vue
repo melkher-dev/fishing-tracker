@@ -41,9 +41,9 @@
                     <div
                         v-for="(fishing_detail, index) in form.fishing_details"
                         :key="index"
-                        class="grid grid-cols-3"
+                        class="grid grid-cols-7"
                     >
-                        <div class="mr-1">
+                        <div class="col-span-2 mr-1">
                             <select
                                 v-model="fishing_detail.fish"
                                 class="select select-primary bg-white w-full"
@@ -56,7 +56,7 @@
                                 </option>
                             </select>
                         </div>
-                        <div class="mx-2">
+                        <div class="col-span-2 mx-2">
                             <input
                                 v-model="fishing_detail.quantity"
                                 type="number"
@@ -64,12 +64,33 @@
                                 class="input input-bordered input-primary bg-white w-full"
                             />
                         </div>
-                        <div class="ml-1">
+                        <div class="col-span-2 ml-1">
                             <input
                                 v-on:change="fileUpload($event, index)"
                                 type="file"
                                 class="file-input file-input-bordered file-input-primary bg-white w-full"
                             />
+                        </div>
+                        <div class="col-span-1 ml-2">
+                            <button
+                            :disabled="index === 0"
+                                @click="form.fishing_details.splice(index, 1)"
+                                class="btn btn-primary btn-outline"
+                            >
+                                Remove
+                            </button>
+                            <button
+                                @click="
+                                    form.fishing_details.push({
+                                        fish: '',
+                                        quantity: '',
+                                        image: '',
+                                    })
+                                "
+                                class="btn btn-primary btn-outline ml-2"
+                            >
+                                Add
+                            </button>
                         </div>
                     </div>
 
@@ -101,7 +122,7 @@
 
                     <div class="flex justify-center">
                         <button @click="handleTrip">
-                            <span class="btn btn-primary btn-outline"
+                            <span class="btn btn-primary btn-outline btn-sm"
                                 >Create Trip</span
                             >
                         </button>
